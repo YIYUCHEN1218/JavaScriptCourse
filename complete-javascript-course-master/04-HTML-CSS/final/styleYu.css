@@ -1,0 +1,53 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: rgb(217, 255, 184);
+  font-family: Arial;
+  font-size: 20px;
+  padding: 50px;
+}
+
+/* 標籤名字 */
+h1 {
+  font-size: 40px;
+  margin-bottom: 25px;
+}
+
+h2 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+input,
+button {
+  padding: 10px;
+  font-size: 16px;
+}
+
+p {
+  margin-bottom: 20px;
+}
+
+a {
+  background-color: yellowgreen;
+}
+
+/* class名字 */
+.first {
+  color: red;
+}
+
+#course-image {
+  width: 300px;
+}
+
+/* id名字 */
+#CHENYIYU {
+  background-color: yellow;
+  border: 5px solid #817474;
+  width: 400px;
+}

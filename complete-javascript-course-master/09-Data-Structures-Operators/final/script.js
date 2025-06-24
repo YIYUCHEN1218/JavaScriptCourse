@@ -59,7 +59,24 @@ const flights =
 //              Arrival from BRU to FAO (11h45)
 //   🔴 Delayed Arrival from HEL to FAO (12h05)
 //            Departure from FAO to LIS (12h30)
+*/
+const flights =
+  '_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30';
 
+console.log(flights);
+const flight = flights.split('+');
+for (const infors of flight) {
+  const infor = infors.split(';');
+  const str1 = infor[0].replaceAll('_', ' ').trim('_');
+  const str2 = infor[1].slice(0, 3).toUpperCase();
+  const str3 = infor[2].slice(0, 3).toUpperCase();
+  const str4 = infor[3].replace(':', 'h');
+  const output = `${
+    str1.startsWith('Delayed') ? '🔴' : ''
+  } ${str1} from ${str2} to ${str3} (${str4})`.padStart(50);
+  console.log(output);
+}
+/*
 const getCode = str => str.slice(0, 3).toUpperCase();
 
 for (const flight of flights.split('+')) {
@@ -102,7 +119,23 @@ Afterwards, test with your own test data!
 
 GOOD LUCK 😀
 */
+console.log('=====String=====');
+document.body.append(document.createElement('textarea'));
+document.body.append(document.createElement('button'));
 
+document.querySelector('button').addEventListener('click', function () {
+  const text = document.querySelector('textarea').value;
+  const rows = text.split('\n');
+  for (const [i, row] of rows.entries()) {
+    const [first, second] = row.toLowerCase().trim().split('_');
+    const output = `${first}${second.replace(
+      second[0],
+      second[0].toUpperCase()
+    )}`;
+    console.log(`${output.padEnd(20)} ${'✅'.repeat(i + 1)}`);
+  }
+});
+console.log('=====String=====');
 /*
 document.body.append(document.createElement('textarea'));
 document.body.append(document.createElement('button'));
@@ -313,7 +346,19 @@ const gameEvents = new Map([
   [80, '⚽️ GOAL'],
   [92, '🔶 Yellow card'],
 ]);
+console.log('=====================');
+const events = [...new Set(gameEvents.values())];
+console.log(events);
 
+gameEvents.delete(64);
+const time = [...gameEvents.keys()].pop();
+const average = time / gameEvents.size;
+console.log(`An event happened, on average, every ${average} minutes`);
+
+for (const [key, value] of gameEvents) {
+  console.log(`[${key <= 45 ? 'FIRST HALF' : 'SECOND HALF'}] ${key}: ${value}`);
+}
+console.log('=====================');
 /*
 // 1.
 const events = [...new Set(gameEvents.values())];
@@ -555,6 +600,36 @@ const game = {
   },
 };
 
+//1.
+for (const [i, player] of game.scored.entries()) {
+  console.log(`Goal ${i + 1}:${player}`);
+}
+
+//2.
+let averageOdd = 0;
+for (const odd of Object.values(game.odds)) {
+  averageOdd += odd;
+  console.log(averageOdd);
+}
+console.log(Object.values(game.odds).length);
+averageOdd /= Object.values(game.odds).length;
+console.log(averageOdd);
+
+//3.
+const oddsObj = Object.entries(game.odds);
+for (const [team, odd] of oddsObj) {
+  const teamName = game[team] ?? 'draw';
+  console.log(`Odd of ${teamName}: ${odd}`);
+}
+
+//bonus
+const scorers = {};
+for (const player of game.scored.values()) {
+  if (scorers[player]) scorers[player] += 1;
+  else scorers[player] = 1;
+}
+console.log(scorers);
+
 /*
 // 1.
 for (const [i, player] of game.scored.entries())
@@ -679,6 +754,26 @@ TEST DATA FOR 6: Use players 'Davies', 'Muller', 'Lewandowski' and 'Kimmich'. Th
 
 GOOD LUCK 😀
 */
+
+/* const { team1, team2, odds } = game;
+console.log(team1);
+console.log(team2);
+console.log(odds); */
+
+/* const [player1, players2] = game.players;
+const [gk, ...fieldPlayers] = player1;
+const allPlayers = [...player1, ...players2];
+const players1Final = ['Thiago', 'Coutinho', 'Perisic', ...player1];
+
+const {
+  odds: { team1, x: draw, team2 },
+} = game;
+console.log(team1, draw, team2);
+
+const printGoals = function (...players) {
+  console.log(players);
+  console.log(`${players.length} goals were scored`);
+}; */
 
 /*
 // 1.
